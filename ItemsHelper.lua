@@ -17,8 +17,8 @@ function ItemsHelper.CheckBlink(p1, p2, p3, p4)
 	if p4 == Enum.UnitOrder.DOTA_UNIT_ORDER_CAST_POSITION and p1 ~= nil and p1 ~= 0 and Entity.IsEntity(p1) and Ability.GetName(p1) == 'item_blink' then	
 		local k1 = Entity.GetAbsOrigin(p3)
 		k3 = p2:Distance(k1):Length()
-		if k3 < 1200 then return false end
-		Ability.CastAbilityPosition(p1, Extend(k1, p2, 1199))
+		if k3 < (1199 + NPC.GetCastRangeBonus(p3)) then return false end
+		Ability.CastAbilityPosition(p1, Extend(k1, p2, 1199 + NPC.GetCastRangeBonus(p3)))
 		return true
 	end
 end

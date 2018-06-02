@@ -43,7 +43,7 @@ function Ability.CastCustomTarget(p1, p2, p3)
 	return true
 end
 
-function Ability.GetRange(p1)
+function Ability.GetRadius(p1)
 	return Ability.GetLevelSpecialValueFor(p1, "radius")
 end
 
