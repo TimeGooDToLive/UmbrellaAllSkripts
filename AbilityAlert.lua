@@ -11,9 +11,6 @@ local Font = Renderer.LoadFont("Tahoma", 12, Enum.FontWeight.BOLD);
 
 
 function a1.InsertParticle( particle )
-	for k,v in pairs(particle) do
-	--	Log.Write(tostring(k)..'|'..tostring(v))
-	end
 	for k,v in pairs(AbilityList) do
 		if particle.name == v.name then
 			local NewParticle = {

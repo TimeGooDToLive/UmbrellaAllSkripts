@@ -2,14 +2,6 @@ local Utils = {}
 
 _G.Config = {}
 
-function math.pow(p1, p2)
-	local k1 = 1
-	for i = 1, p2 do
-		k1 = k1 * p1 
-	end
-	return k1
-end
-
 function NPC.GetAbsOrigin(p1)
 	return Entity.GetAbsOrigin(p1)
 end
