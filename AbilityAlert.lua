@@ -99,7 +99,7 @@ function a1.OnDraw()
 				table.remove(ParticleList, k)
 			else
 				if v.entity ~= nil and v.entity ~= 0 and v.pos ~= nil then
-					if (NPC.IsAlive(v.entity) and NPC.IsVisible(v.entity) ~= true) or v.name == "teleport_end" or v.name == "teleport_start" then
+					if (Entity.IsEntity(v.entity) and NPC.IsVisible(v.entity) ~= true) or v.name == "teleport_end" or v.name == "teleport_start" then
 						if Entity.IsSameTeam(LocalHero,v.entity) then return end;
 						local shortname = tostring(NPC.GetUnitName(v.entity))
 						local IsHero = string.find(shortname, "npc_dota_hero_")
