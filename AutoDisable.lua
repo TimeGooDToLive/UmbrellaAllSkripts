@@ -237,7 +237,7 @@ function AutoDisable.OnUpdate()
 						if #AutoDisable.Both > 0 then
 							for h,j in pairs(AutoDisable.Both) do
 								local l1 = Ability.GetCastRange(j[1])
-								local l2 = Ability.GetRange(j[1])
+								local l2 = Ability.GetRadius(j[1])
 								if l1 == 0 then l0 = l2 else l0 = l1 end
 								if NPC.IsEntityInRange(AutoDisable.LocalHero, v, l0) and p2 > j[2] then
 									local k1 = Ability.GetBehavior(j[1])
