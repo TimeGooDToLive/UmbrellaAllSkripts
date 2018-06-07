@@ -64,8 +64,10 @@ function Dodger.init()
             
             for j = 0,5 do
                 local ability = NPC.GetAbilityByIndex(hero, j)
-                local abilityName = Ability.GetName(ability)
-                
+				if Ability.GetName(ability) ~= nil then
+					local abilityName = Ability.GetName(ability)
+                end
+				
                 if Dodger.skillInfoMap[abilityName] or Dodger.skillProjectileMap[abilityName] then
                 	--Log.Write("heroMap:     "..heroName)
                     Dodger.heroMap[heroName] = hero
