@@ -100,6 +100,7 @@ function Dodger.OnUnitAbility()
 	                end 
 
 	                if not haveSkill then
+						Log.Write('Skill')
 	                    table.insert(Dodger.dodgeQueue,{abilityName = skillName, entity=hero,time=GameRules.GetGameTime() + Ability.GetCastPoint(skill)})
 	                end
 	            end
@@ -118,15 +119,16 @@ function Dodger.castAnimDodger()
 
     local myHero = Heroes.GetLocal()
     if not myHero then return end 
-    for i = 1,#Dodger.dodgeQueue do
+   
+	for i = 1,#Dodger.dodgeQueue do
+
         local content = Dodger.dodgeQueue[i]
         local hero = content['entity']
         local abilityName = content['abilityName']
         local effectiveTime = content["time"]
         local ability = NPC.GetAbility(hero,abilityName)
-
+	
         local isTargetMe = Dodger.isTargetMe(myHero,hero, ability)
-
         if Dodger.skillInfoMap[abilityName]['isGlobal'] or isTargetMe or Dodger.skillInfoMap[abilityName]['afterEffect'] and Dodger.skillInfoMap[abilityName]['wasTargetMe'] then     
             local items = Dodger.skillInfoMap[abilityName]['item']
             --Log.Write("effectiveTime:"..(effectiveTime-0.1).."  time:"..GameRules.GetGameTime())
@@ -266,7 +268,7 @@ function Dodger.isTargetMe(myHero,enemy, ability)
     if abilityName == "faceless_void_chronosphere" and NPC.GetAbility(enemy, "special_bonus_unique_faceless_void_4") then
         radius = radius +175
     end 
-
+	
     local pointsNum = math.floor(range/5) + 1
     for i = pointsNum,1,-1 do 
         direction:Normalize()
@@ -276,7 +278,7 @@ function Dodger.isTargetMe(myHero,enemy, ability)
         local pos = direction + origin
         -- local x, y, onScreen = Renderer.WorldToScreen(pos)
         -- Renderer.DrawTextCentered(Dodger.font, x , y,"x", 1)
-
+		--if range > radius then radius = range end
         if NPC.IsPositionInRange(myHero, pos, radius, 0) then 
             return true 
         end
@@ -290,6 +292,7 @@ function Dodger.OnUnitAnimation(animation)
         
         Dodger.initAnimationSkillMap(animation)
         local skillName = Dodger.animationSkillMap[animation.sequenceName]
+		
         if skillName and not Entity.IsSameTeam(animation.unit, Heroes.GetLocal()) then
 
 			animation.castpoint = Ability.GetCastPoint(NPC.GetAbility(animation.unit, skillName))
@@ -318,7 +321,6 @@ end
 -- end
 
 function Dodger.OnProjectile(projectile)
-	--Log.Write(projectile.name)
 	if Dodger.projectileSkillMap[projectile.name] and Entity.IsSameTeam(Heroes.GetLocal(),projectile.target) then
 		table.insert(Dodger.projectileQueue, {
 			projectile=projectile,
@@ -350,6 +352,7 @@ function Dodger.initAnimationSkillMap(animation)
             Dodger.animationSkillMap[animation.sequenceName] = Ability.GetName(ability)
             --Log.Write("we got on mapping from animation to ability: "..animation.sequenceName.."/"..Ability.GetName(ability))
         end
+		
         Dodger.animationDirty[animation.sequenceName] = true
     end
 end
@@ -457,7 +460,7 @@ function Dodger.initSkillInfoMap()
 	Dodger.skillInfoMap['axe_berserkers_call'] = 
 	{
 	    item={  
-	            item_manta={abilityType=0,time=0.13},
+	            item_manta={abilityType=0,time=0.10},
 	            item_cyclone={abilityType=1, time=0.2}
 	        },
 	    isGlobal= false,
@@ -501,7 +504,7 @@ function Dodger.initSkillInfoMap()
 	            item_hood_of_defiance={abilityType=0, time=0}
 	        },
 	    isGlobal= false,
-	    radius={50,50,50},
+	    radius={550,550,550},
 	    range={550,550,550}
 	}
 
