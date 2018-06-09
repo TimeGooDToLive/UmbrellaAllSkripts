@@ -1,7 +1,5 @@
 local Utils = {}
 
-_G.Config = {}
-
 function NPC.GetAbsOrigin(p1)
 	return Entity.GetAbsOrigin(p1)
 end
@@ -47,29 +45,5 @@ function Ability.GetRadius(p1)
 	return Ability.GetLevelSpecialValueFor(p1, "radius")
 end
 
-function Config.ReadString(name, key, defValue)
-	return ""
-end
-
-function Config.ReadInt(name, key, defValue)
-	return ""
-end
-
-function Config.ReadFloat(name, key, defValue)
-	return ""
-end
-
-function Config.WriteInt(name, key, defValue)
-	return ""
-end
-
-function Config.WriteFloat(name, key, defValue)
-	return ""
-end
-
-
-function Config.WriteString(name, key, defValue)
-	return ""
-end
 
 return Utils
