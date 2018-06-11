@@ -18,18 +18,6 @@ function NPC.GetHeroesInRadius(p1, p2, p3)
 end
 
 
-function Renderer.DrawTextCenteredX(p1, p2, p3, p4, p5)
-	return Renderer.DrawText(p1, p2, p3, p4)
-end
-
-function Renderer.DrawTextCenteredY(p1, p2, p3, p4, p5)
-	return Renderer.DrawText(p1, p2, p3, p4)
-end
-
-function Renderer.DrawTextCentered(p1, p2, p3, p4, p5)
-	return Renderer.DrawText(p1, p2-6, p3-6, p4)
-end
-
 function Ability.CastAbilityPosition(p1, p2)
 	Player.PrepareUnitOrders(Players.GetLocal(), Enum.UnitOrder.DOTA_UNIT_ORDER_CAST_POSITION, nil, p2, p1, Enum.PlayerOrderIssuer.DOTA_ORDER_ISSUER_CURRENT_UNIT_ONLY, nil, false, false)
 	return true
